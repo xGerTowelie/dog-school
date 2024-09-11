@@ -39,8 +39,8 @@ export default function DogSchoolPage() {
             <HeroSection />
             <PhilosophySection />
             <TrainingsCarousel />
-            <ProductsCarousel />
             <TestimonialsSection />
+            <ProductsCarousel />
             <PricingSection />
             <ContactSection />
             <Footer />
@@ -60,8 +60,8 @@ function Navbar({ activeSection }) {
                         <li key={section}>
                             <Link
                                 href={`#${section}`}
-                                className={`hover:text-cyan-600 transition-colors ${sections.indexOf(section) <= sections.indexOf(activeSection)
-                                    ? 'border-b-2 border-cyan-600'
+                                className={`hover:text-slate-600 transition-colors ${sections.indexOf(section) <= sections.indexOf(activeSection)
+                                    ? 'border-b-2 border-slate-600'
                                     : ''
                                     }`}
                             >
@@ -109,7 +109,7 @@ function HeroSection() {
                 >
                     <Link
                         href="#contact"
-                        className="bg-cyan-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-cyan-700 transition-colors"
+                        className="bg-slate-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-cyan-700 transition-colors"
                     >
                         Get Started
                     </Link>
@@ -149,14 +149,14 @@ function PhilosophySection() {
     return (
         <section id="philosophy" className="py-24">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-cyan-800">Meine Philosophy</h2>
+                <h2 className="text-6xl font-bold text-center py-10 mb-16 text-slate-800">Meine Philosophy</h2>
                 {philosophies.map((philosophy, index) => (
                     <motion.div
                         key={philosophy.title}
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: index * 0.1 }}
-                        className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-24`}
+                        className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-44`}
                     >
                         <div className="md:w-1/2 mb-6 md:mb-0">
                             <Image
@@ -168,7 +168,7 @@ function PhilosophySection() {
                             />
                         </div>
                         <div className="md:w-1/2 md:px-10">
-                            <h3 className="text-2xl font-semibold mb-4 text-cyan-700">{philosophy.title}</h3>
+                            <h3 className="text-2xl font-semibold mb-4 text-slate-700">{philosophy.title}</h3>
                             <p className="text-lg">{philosophy.description}</p>
                         </div>
                     </motion.div>
@@ -182,17 +182,17 @@ function TrainingsCarousel() {
     const trainings = [
         {
             name: 'Basic Obedience',
-            image: '/placeholder.svg?height=300&width=300',
+            image: '/philosophy1.jpg?height=300&width=300',
             text: 'Transform your pup into a well-mannered companion with our foundational training program.',
         },
         {
             name: 'Advanced Skills',
-            image: '/placeholder.svg?height=300&width=300',
+            image: '/philosophy2.jpg?height=300&width=300',
             text: 'Take your dog"s abilities to the next level with our advanced training techniques.',
         },
         {
             name: 'Behavior Modification',
-            image: '/placeholder.svg?height=300&width=300',
+            image: '/philosophy3.jpg?height=300&width=300',
             text: 'Address specific behavioral issues and create a harmonious relationship with your furry friend.',
         },
     ]
@@ -209,47 +209,47 @@ function TrainingsCarousel() {
     }
 
     useEffect(() => {
-        controls.start({ opacity: [0, 1], x: [50, 0], transition: { duration: 0.8 } })
+        controls.start({ opacity: [1, 0, 0, 1], x: [0, -100, 100, 0], transition: { duration: 1.1, ease: 'linear' } })
     }, [currentIndex, controls])
 
     return (
-        <section id="trainings" className="py-24 bg-neutral-800">
+        <section id="trainings" className="py-36 bg-neutral-800">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-white">Meine Trainings im Ueberblick</h2>
+                <h2 className="text-4xl font-bold text-center mb-24 text-white">Meine Trainings im Ueberblick</h2>
                 <div className="relative">
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
-                        className="absolute left-0 rounded-xl top-1/2 transform -translate-y-1/2 z-10 bg-white transition-all hover:scale-125 hover:bg-cyan-200"
+                        className="absolute left-36 rounded-xl top-1/2 transform ease-in-out -translate-y-1/2 z-10 transition-all hover:scale-150"
                         onClick={prevSlide}
                     >
-                        <ChevronLeft className="h-4 w-4" />
+                        <ChevronLeft className="h-12 w-12 text-white" />
                     </Button>
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:scale-125 hover:bg-cyan-200"
+                        className="absolute right-36 rounded-xl top-1/2 transform ease-in-out -translate-y-1/2 z-10 hover:scale-150"
                         onClick={nextSlide}
                     >
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="h-12 w-12 text-white" />
                     </Button>
                     <motion.div
                         key={currentIndex}
                         animate={controls}
                         className="flex justify-center"
                     >
-                        <Card className="w-full max-w-md bg-white">
-                            <CardContent className="p-6">
+                        <Card className="w-full max-w-3xl bg-white hover:scale-105 ease-in-out transition-all">
+                            <CardContent className="py-10 px-14">
                                 <Image
                                     src={trainings[currentIndex].image}
                                     alt={trainings[currentIndex].name}
                                     width={300}
                                     height={300}
-                                    className="w-full h-48 object-cover mb-4 rounded-lg"
+                                    className="w-full h-80 object-cover mb-4 rounded-xl"
                                 />
-                                <h3 className="text-xl font-semibold mb-2 text-cyan-700">{trainings[currentIndex].name}</h3>
-                                <p className="mb-4">{trainings[currentIndex].text}</p>
-                                <Button className="w-full bg-cyan-600 hover:bg-cyan-700 text-white">Learn More</Button>
+                                <h3 className="text-2xl font-semibold mt-10 text-slate-500">{trainings[currentIndex].name}</h3>
+                                <p className="mb-8 mt-2">{trainings[currentIndex].text}{trainings[currentIndex].text}</p>
+                                <Button className="w-full bg-slate-600 hover:bg-slate-700 text-xl py-6 rounded-sm text-white">Learn More</Button>
                             </CardContent>
                         </Card>
                     </motion.div>
@@ -299,12 +299,12 @@ function ProductsCarousel() {
     return (
         <section id="products" className="py-24">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-cyan-800">Our Dog Food Products</h2>
+                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Our Dog Food Products</h2>
                 <div className="relative">
                     <Button
                         variant="outline"
                         size="icon"
-                        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-cyan-100 hover:bg-cyan-200"
+                        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-slate-100 hover:bg-cyan-200"
                         onClick={prevSlide}
                     >
                         <ChevronLeft className="h-4 w-4" />
@@ -312,7 +312,7 @@ function ProductsCarousel() {
                     <Button
                         variant="outline"
                         size="icon"
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-cyan-100 hover:bg-cyan-200"
+                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-slate-100 hover:bg-cyan-200"
                         onClick={nextSlide}
                     >
                         <ChevronRight className="h-4 w-4" />
@@ -331,10 +331,10 @@ function ProductsCarousel() {
                                     height={300}
                                     className="w-full h-48 object-cover mb-4 rounded-lg"
                                 />
-                                <h3 className="text-xl font-semibold mb-2 text-cyan-700">{products[currentIndex].name}</h3>
+                                <h3 className="text-xl font-semibold mb-2 text-slate-700">{products[currentIndex].name}</h3>
                                 <p className="mb-2">{products[currentIndex].description}</p>
-                                <p className="text-lg font-bold mb-4 text-cyan-600">${products[currentIndex].price.toFixed(2)}</p>
-                                <Button className="w-full bg-cyan-600 hover:bg-cyan-700 text-white">Add to Cart</Button>
+                                <p className="text-lg font-bold mb-4 text-slate-600">${products[currentIndex].price.toFixed(2)}</p>
+                                <Button className="w-full bg-slate-600 hover:bg-cyan-700 text-white">Add to Cart</Button>
                             </CardContent>
                         </Card>
                     </motion.div>
@@ -363,21 +363,39 @@ function TestimonialsSection() {
             image: "/placeholder.svg?height=100&width=100",
             text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
             training: "Advanced Skills"
+        },
+        {
+            name: "John D.",
+            image: "/placeholder.svg?height=100&width=100",
+            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
+            training: "Basic Obedience"
+        },
+        {
+            name: "Sarah M.",
+            image: "/placeholder.svg?height=100&width=100",
+            text: "I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.",
+            training: "Behavior Modification"
+        },
+        {
+            name: "Mike R.",
+            image: "/placeholder.svg?height=100&width=100",
+            text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
+            training: "Advanced Skills"
         }
     ]
 
     return (
-        <section id="testimonials" className="py-24 bg-cyan-50">
+        <section id="testimonials" className="py-24 bg-slate-50">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-cyan-800">What Our Clients Say</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Was meine Kunden sagen</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-24 gap-y-10">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.name}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: index * 0.1 }}
-                            className="bg-white rounded-lg overflow-hidden shadow-lg p-6"
+                            className="bg-white rounded-lg overflow-hidden shadow-md shadow-black/20 p-6"
                         >
                             <div className="flex items-center mb-4">
                                 <Image
@@ -388,8 +406,8 @@ function TestimonialsSection() {
                                     className="rounded-full mr-4"
                                 />
                                 <div>
-                                    <h3 className="font-semibold text-cyan-700">{testimonial.name}</h3>
-                                    <p className="text-sm text-cyan-600">{testimonial.training}</p>
+                                    <h3 className="font-semibold text-slate-700">{testimonial.name}</h3>
+                                    <p className="text-sm text-slate-600">{testimonial.training}</p>
                                 </div>
                             </div>
                             <p className="italic text-gray-600">{testimonial.text}</p>
@@ -411,7 +429,7 @@ function PricingSection() {
     return (
         <section id="pricing" className="py-24">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-cyan-800">Training Packages</h2>
+                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Training Packages</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {pricingPlans.map((plan, index) => (
                         <motion.div
@@ -422,19 +440,19 @@ function PricingSection() {
                             className="bg-white rounded-lg overflow-hidden shadow-lg"
                         >
                             <div className="p-6">
-                                <h3 className="text-2xl font-semibold mb-2 text-cyan-700">{plan.name}</h3>
-                                <p className="text-3xl font-bold mb-4 text-cyan-600">${plan.price}</p>
+                                <h3 className="text-2xl font-semibold mb-2 text-slate-700">{plan.name}</h3>
+                                <p className="text-3xl font-bold mb-4 text-slate-600">${plan.price}</p>
                                 <ul className="mb-6">
                                     {plan.features.map((feature) => (
                                         <li key={feature} className="mb-2 flex items-center">
-                                            <svg className="w-4 h-4 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="w-4 h-4 mr-2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                                             </svg>
                                             {feature}
                                         </li>
                                     ))}
                                 </ul>
-                                <Button className="w-full bg-cyan-600 hover:bg-cyan-700 text-white">Enroll Now</Button>
+                                <Button className="w-full bg-slate-600 hover:bg-cyan-700 text-white">Enroll Now</Button>
                             </div>
                         </motion.div>
                     ))}
@@ -446,15 +464,15 @@ function PricingSection() {
 
 function ContactSection() {
     return (
-        <section id="contact" className="py-24 bg-cyan-50">
+        <section id="contact" className="py-24 bg-slate-50">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-cyan-800">Get in Touch</h2>
+                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Get in Touch</h2>
                 <div className="max-w-md mx-auto">
                     <form className="space-y-4">
-                        <input type="text" placeholder="Your Name" className="w-full p-2 rounded-md border border-cyan-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50" />
-                        <input type="email" placeholder="Your Email" className="w-full p-2 rounded-md border border-cyan-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50" />
-                        <textarea placeholder="Your Message" rows={4} className="w-full p-2 rounded-md border border-cyan-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50"></textarea>
-                        <Button type="submit" className="w-full bg-cyan-600 hover:bg-cyan-700 text-white">Send Message</Button>
+                        <input type="text" placeholder="Your Name" className="w-full p-2 rounded-md border border-slate-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50" />
+                        <input type="email" placeholder="Your Email" className="w-full p-2 rounded-md border border-slate-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50" />
+                        <textarea placeholder="Your Message" rows={4} className="w-full p-2 rounded-md border border-slate-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50"></textarea>
+                        <Button type="submit" className="w-full bg-slate-600 hover:bg-slate-700 text-white">Send Message</Button>
                     </form>
                 </div>
             </div>
@@ -464,14 +482,14 @@ function ContactSection() {
 
 function Footer() {
     return (
-        <footer className="bg-cyan-800 text-white py-8">
+        <footer className="bg-slate-800 text-white py-8">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <p>&copy; 2023 DoggyEdu. All rights reserved.</p>
                     <nav className="mt-4 md:mt-0">
                         <ul className="flex space-x-4">
-                            <li><Link href="/privacy" className="hover:text-cyan-300">Privacy Policy</Link></li>
-                            <li><Link href="/terms" className="hover:text-cyan-300">Terms of Service</Link></li>
+                            <li><Link href="/privacy" className="hover:text-slate-300">Privacy Policy</Link></li>
+                            <li><Link href="/terms" className="hover:text-slate-300">Terms of Service</Link></li>
                         </ul>
                     </nav>
                 </div>
