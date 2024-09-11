@@ -28,20 +28,18 @@ npm run dev
 - [ ] test
 - [x] test
 
+> [!Warning]
+> Always be sure to manually install the
+> missing #depenedencies#
+> with multiple lines
 
->  
-> i love
-> 
-> big
-> 
-> blocks of text
-> 
-> with this markdown
-> 
-> or quotes 
-> 
+> [!Info]
+> Always be sure to manually install the
+> missing #depenedencies#
+> with multiple lines
 
-
-
-
+> [!Error]
+> Always be sure to manually install the
+> missing #depenedencies#
+> with multiple lines
 
