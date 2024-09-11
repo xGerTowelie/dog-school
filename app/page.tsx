@@ -293,48 +293,48 @@ function ProductsCarousel() {
     }
 
     useEffect(() => {
-        controls.start({ opacity: [0, 1], x: [50, 0], transition: { duration: 0.8 } })
+        controls.start({ opacity: [1, 0, 0, 1], x: [0, -100, 100, 0], transition: { duration: 1.1, ease: 'linear' } })
     }, [currentIndex, controls])
 
     return (
-        <section id="products" className="py-24">
+        <section id="produkte" className="py-36 bg-neutral-800">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Our Dog Food Products</h2>
+                <h2 className="text-4xl font-bold text-center mb-24 text-white">Unsere Hundefutter Produkte</h2>
                 <div className="relative">
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
-                        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-slate-100 hover:bg-cyan-200"
+                        className="absolute left-36 rounded-xl top-1/2 transform ease-in-out -translate-y-1/2 z-10 transition-all hover:scale-150"
                         onClick={prevSlide}
                     >
-                        <ChevronLeft className="h-4 w-4" />
+                        <ChevronLeft className="h-12 w-12 text-white" />
                     </Button>
                     <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-slate-100 hover:bg-cyan-200"
+                        className="absolute right-36 rounded-xl top-1/2 transform ease-in-out -translate-y-1/2 z-10 hover:scale-150"
                         onClick={nextSlide}
                     >
-                        <ChevronRight className="h-4 w-4" />
+                        <ChevronRight className="h-12 w-12 text-white" />
                     </Button>
                     <motion.div
                         key={currentIndex}
                         animate={controls}
                         className="flex justify-center"
                     >
-                        <Card className="w-full max-w-md bg-white">
-                            <CardContent className="p-6">
+                        <Card className="w-full max-w-3xl bg-white hover:scale-105 ease-in-out transition-all">
+                            <CardContent className="py-10 px-14">
                                 <Image
                                     src={products[currentIndex].image}
                                     alt={products[currentIndex].name}
                                     width={300}
                                     height={300}
-                                    className="w-full h-48 object-cover mb-4 rounded-lg"
+                                    className="w-full h-80 object-cover mb-4 rounded-xl"
                                 />
-                                <h3 className="text-xl font-semibold mb-2 text-slate-700">{products[currentIndex].name}</h3>
-                                <p className="mb-2">{products[currentIndex].description}</p>
-                                <p className="text-lg font-bold mb-4 text-slate-600">${products[currentIndex].price.toFixed(2)}</p>
-                                <Button className="w-full bg-slate-600 hover:bg-cyan-700 text-white">Add to Cart</Button>
+                                <h3 className="text-2xl font-semibold mt-10 text-slate-500">{products[currentIndex].name}</h3>
+                                <p className="mb-8 mt-2">{products[currentIndex].description}</p>
+                                <p className="text-2xl font-bold mb-8 text-slate-600">${products[currentIndex].price.toFixed(2)}</p>
+                                <Button className="w-full bg-slate-600 hover:bg-slate-700 text-xl py-6 rounded-sm text-white">Add to Cart</Button>
                             </CardContent>
                         </Card>
                     </motion.div>
@@ -349,55 +349,43 @@ function TestimonialsSection() {
         {
             name: "John D.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
+            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
             training: "Basic Obedience"
         },
         {
             name: "Sarah M.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.",
+            text: "I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.",
             training: "Behavior Modification"
         },
         {
             name: "Mike R.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
+            text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
             training: "Advanced Skills"
         },
         {
             name: "John D.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
+            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
             training: "Basic Obedience"
         },
-        {
-            name: "Sarah M.",
-            image: "/placeholder.svg?height=100&width=100",
-            text: "I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.",
-            training: "Behavior Modification"
-        },
-        {
-            name: "Mike R.",
-            image: "/placeholder.svg?height=100&width=100",
-            text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
-            training: "Advanced Skills"
-        }
     ]
 
     return (
-        <section id="testimonials" className="py-24 bg-slate-50">
+        <section id="testimonials" className="py-60 bg-slate-50">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Was meine Kunden sagen</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-x-24 gap-y-10">
+                <h2 className="text-5xl font-bold text-center mb-24 text-slate-800">Was meine Kunden sagen</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-20">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.name}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: index * 0.1 }}
-                            className="bg-white rounded-lg overflow-hidden shadow-md shadow-black/20 p-6"
+                            className="bg-white rounded-xl overflow-hidden shadow-md shadow-black/20 p-12"
                         >
-                            <div className="flex items-center mb-4">
+                            <div className=" overflow-hidden flex items-center mb-4">
                                 <Image
                                     src={testimonial.image}
                                     alt={testimonial.name}
