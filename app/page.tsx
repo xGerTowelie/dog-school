@@ -8,17 +8,18 @@ import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
-const sections = ['Home', 'Philosophy', 'Trainings', 'Produkte', 'Meine Kunden', 'Preise', 'Kontakt']
+type SectionType = 'Home' | 'Philosophy' | 'Trainings' | 'Produkte' | 'Meine Kunden' | 'Preise' | 'Kontakt'
+const sections: SectionType[] = ['Home', 'Philosophy', 'Trainings', 'Produkte', 'Meine Kunden', 'Preise', 'Kontakt']
 
 export default function DogSchoolPage() {
-    const [activeSection, setActiveSection] = useState('start')
+    const [activeSection, setActiveSection] = useState<SectionType>('Home')
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id)
+                        setActiveSection(entry.target.id as SectionType)
                     }
                 })
             },
@@ -48,7 +49,7 @@ export default function DogSchoolPage() {
     )
 }
 
-function Navbar({ activeSection }) {
+function Navbar({ activeSection }: { activeSection: SectionType }) {
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border">
             <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -92,7 +93,7 @@ function HeroSection() {
                     transition={{ duration: 0.8 }}
                     className="text-5xl font-bold mb-4"
                 >
-                    Unleash Your Dog's Potential
+                    Unleash Your Dog&apos;s Potential
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 50 }}
