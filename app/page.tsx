@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useAnimation } from 'framer-motion'
-import { ChevronDown, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Menu } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
