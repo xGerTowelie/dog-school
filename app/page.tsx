@@ -1,18 +1,20 @@
 'use client'
 
 import { motion, useAnimation } from 'framer-motion'
-import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 type SectionType = 'Home' | 'Philosophy' | 'Trainings' | 'Produkte' | 'Meine Kunden' | 'Preise' | 'Kontakt'
 const sections: SectionType[] = ['Home', 'Philosophy', 'Trainings', 'Produkte', 'Meine Kunden', 'Preise', 'Kontakt']
 
 export default function DogSchoolPage() {
     const [activeSection, setActiveSection] = useState<SectionType>('Home')
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -36,7 +38,7 @@ export default function DogSchoolPage() {
 
     return (
         <div className="min-h-screen bg-background text-foreground">
-            <Navbar activeSection={activeSection} />
+            <Navbar activeSection={activeSection} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
             <HeroSection />
             <PhilosophySection />
             <TrainingsCarousel />
@@ -49,14 +51,15 @@ export default function DogSchoolPage() {
     )
 }
 
-function Navbar({ activeSection }: { activeSection: SectionType }) {
+function Navbar({ activeSection, isMenuOpen, setIsMenuOpen }: { activeSection: SectionType, isMenuOpen: boolean, setIsMenuOpen: (isOpen: boolean) => void }) {
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border">
             <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-10 text-2xl font-bold text-black">
-                    <Image src="/logo.png" alt="" width="384" height="209" className="w-[74px] h-[42px] mix-blend-multiply" /> Freunde fuers Leben
+                <Link href="/" className="flex items-center gap-2 text-xl md:text-2xl font-bold text-black">
+                    <Image src="/logo.png" alt="" width="384" height="209" className="w-[50px] h-[28px] md:w-[74px] md:h-[42px] mix-blend-multiply" />
+                    <span className="hidden md:inline">Freunde fuers Leben</span>
                 </Link>
-                <ul className="flex space-x-8">
+                <ul className="hidden md:flex space-x-4 lg:space-x-8">
                     {sections.map((section) => (
                         <li key={section}>
                             <Link
@@ -71,6 +74,28 @@ function Navbar({ activeSection }: { activeSection: SectionType }) {
                         </li>
                     ))}
                 </ul>
+                <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+                    <SheetTrigger asChild>
+                        <Button variant="ghost" size="icon" className="md:hidden">
+                            <Menu className="h-6 w-6" />
+                            <span className="sr-only">Toggle navigation menu</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="bg-white w-[300px] sm:w-[400px]">
+                        <nav className="flex flex-col gap-4">
+                            {sections.map((section) => (
+                                <Link
+                                    key={section}
+                                    href={`#${section}`}
+                                    className="text-lg font-semibold hover:text-slate-600 transition-colors"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                                </Link>
+                            ))}
+                        </nav>
+                    </SheetContent>
+                </Sheet>
             </div>
         </nav>
     )
@@ -91,7 +116,7 @@ function HeroSection() {
                     initial={{ opacity: 0, y: -50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-5xl font-bold mb-4"
+                    className="text-3xl md:text-5xl font-bold mb-4"
                 >
                     Unleash Your Dog&apos;s Potential
                 </motion.h1>
@@ -99,7 +124,7 @@ function HeroSection() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-xl mb-8"
+                    className="text-lg md:text-xl mb-8"
                 >
                     Expert training for happy, obedient companions
                 </motion.p>
@@ -127,7 +152,6 @@ function HeroSection() {
         </section>
     )
 }
-
 function PhilosophySection() {
     const philosophies = [
         {
@@ -148,16 +172,16 @@ function PhilosophySection() {
     ]
 
     return (
-        <section id="philosophy" className="py-24">
+        <section id="philosophy" className="py-16 md:py-24">
             <div className="container mx-auto px-4">
-                <h2 className="text-6xl font-bold text-center py-10 mb-16 text-slate-800">Meine Philosophy</h2>
+                <h2 className="text-4xl md:text-6xl font-bold text-center py-10 mb-16 text-slate-800">Meine Philosophy</h2>
                 {philosophies.map((philosophy, index) => (
                     <motion.div
                         key={philosophy.title}
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: index * 0.1 }}
-                        className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-44`}
+                        className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center mb-16 md:mb-44`}
                     >
                         <div className="md:w-1/2 mb-6 md:mb-0">
                             <Image
@@ -169,8 +193,8 @@ function PhilosophySection() {
                             />
                         </div>
                         <div className="md:w-1/2 md:px-10">
-                            <h3 className="text-2xl font-semibold mb-4 text-slate-700">{philosophy.title}</h3>
-                            <p className="text-lg">{philosophy.description}</p>
+                            <h3 className="text-xl md:text-2xl font-semibold mb-4 text-slate-700">{philosophy.title}</h3>
+                            <p className="text-base md:text-lg">{philosophy.description}</p>
                         </div>
                     </motion.div>
                 ))}
@@ -350,43 +374,43 @@ function TestimonialsSection() {
         {
             name: "John D.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
+            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
             training: "Basic Obedience"
         },
         {
             name: "Sarah M.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.",
+            text: "I was amazed at how quickly my shy rescue dog gained confidence through the Behavior Modification program.",
             training: "Behavior Modification"
         },
         {
             name: "Mike R.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
+            text: "The Advanced Skills class taught my Border Collie amazing tricks. She loves showing off to our friends!",
             training: "Advanced Skills"
         },
         {
-            name: "John D.",
+            name: "Emily L.",
             image: "/placeholder.svg?height=100&width=100",
-            text: "The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!The Basic Obedience class was a game-changer for my energetic Labrador. Now he's a joy to walk!",
+            text: "The Basic Obedience class transformed my unruly puppy into a well-behaved companion. Highly recommended!",
             training: "Basic Obedience"
         },
     ]
 
     return (
-        <section id="testimonials" className="py-60 bg-slate-50">
+        <section id="testimonials" className="py-16 md:py-60 bg-slate-50">
             <div className="container mx-auto px-4">
-                <h2 className="text-5xl font-bold text-center mb-24 text-slate-800">Was meine Kunden sagen</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-20">
+                <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 md:mb-24 text-slate-800">Was meine Kunden sagen</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-24 md:gap-y-20">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={testimonial.name}
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: index * 0.1 }}
-                            className="bg-white rounded-xl overflow-hidden shadow-md shadow-black/20 p-12"
+                            className="bg-white rounded-xl overflow-hidden shadow-md shadow-black/20 p-6 md:p-12"
                         >
-                            <div className=" overflow-hidden flex items-center mb-4">
+                            <div className="overflow-hidden flex items-center mb-4">
                                 <Image
                                     src={testimonial.image}
                                     alt={testimonial.name}
