@@ -91,3 +91,10 @@ npm run dev
 > with multiple lines
 
 
+
+## Todo
+- [ ] figure out slow loading
+- [ ] add authentication
+- [ ] add old data
+- [ ] fill all pictures
+- [ ] add configurable text and prices
