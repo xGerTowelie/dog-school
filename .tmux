@@ -1,5 +1,5 @@
 {
-  "session_name": "fileupload",
+  "session_name": "DogSchool-Coolify",
   "windows": [
     {
       "name": "V",
@@ -11,6 +11,18 @@
       "name": "N",
       "commands": [
         "npm run dev"
+      ]
+    },
+    {
+      "name": "P",
+      "commands": [
+        "npx prisma studio"
+      ]
+    },
+    {
+      "name": "D",
+      "commands": [
+        "docker compose up"
       ]
     }
   ]
