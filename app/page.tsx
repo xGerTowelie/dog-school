@@ -118,7 +118,7 @@ function HeroSection() {
                     transition={{ duration: 0.8 }}
                     className="text-3xl md:text-5xl font-bold mb-4"
                 >
-                    Unleash Your Dog&apos;s Potential
+                    Unleash Your Dog{"'"}s Potential
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 50 }}
