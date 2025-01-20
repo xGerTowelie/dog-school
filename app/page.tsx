@@ -8,6 +8,9 @@ import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import ContactForm from '@/components/ContactForm'
+import { galleryItems } from '@/data/galleryItems'
+import GallerySlider from '@/components/GallerySlider'
 
 type SectionType = 'Home' | 'Philosophy' | 'Trainings' | 'Produkte' | 'Meine Kunden' | 'Preise' | 'Kontakt'
 const sections: SectionType[] = ['Home', 'Philosophy', 'Trainings', 'Produkte', 'Meine Kunden', 'Preise', 'Kontakt']
@@ -41,11 +44,12 @@ export default function DogSchoolPage() {
             <Navbar activeSection={activeSection} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
             <HeroSection />
             <PhilosophySection />
+            <GallerySlider items={galleryItems} />
             <TrainingsCarousel />
             <TestimonialsSection />
             <ProductsCarousel />
             <PricingSection />
-            <ContactSection />
+            <ContactForm />
             <Footer />
         </div>
     )
@@ -475,23 +479,7 @@ function PricingSection() {
     )
 }
 
-function ContactSection() {
-    return (
-        <section id="contact" className="py-24 bg-slate-50">
-            <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-16 text-slate-800">Get in Touch</h2>
-                <div className="max-w-md mx-auto">
-                    <form className="space-y-4">
-                        <input type="text" placeholder="Your Name" className="w-full p-2 rounded-md border border-slate-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50" />
-                        <input type="email" placeholder="Your Email" className="w-full p-2 rounded-md border border-slate-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50" />
-                        <textarea placeholder="Your Message" rows={4} className="w-full p-2 rounded-md border border-slate-200 focus:border-cyan-500 focus:ring focus:ring-cyan-200 focus:ring-opacity-50"></textarea>
-                        <Button type="submit" className="w-full bg-slate-600 hover:bg-slate-700 text-white">Send Message</Button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    )
-}
+
 
 function Footer() {
     return (
