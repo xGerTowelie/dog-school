@@ -21,11 +21,10 @@ export default function ContactForm() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         console.log('Form submitted:', formData)
-        // Here you would typically send the data to your backend
     }
 
     return (
-        <section className="py-32 bg-slate-50 w-full">
+        <section id="Kontakt" className="pt-12 pb-56 w-full">
             <div className="w-full max-w-2xl rounded-xl shadow-xl p-8 mx-auto">
                 <div className="flex items-center justify-center mb-6">
                     <PawPrint size={40} className="text-yellow-500 mr-2" />

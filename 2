@@ -1,0 +1,53 @@
+import Link from "next/link";
+import Image from "next/image";
+
+function Navbar({ activeSection, isMenuOpen, setIsMenuOpen }: { activeSection: SectionType, isMenuOpen: boolean, setIsMenuOpen: (isOpen: boolean) => void }) {
+    return (
+        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-border">
+            <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2 text-xl md:text-2xl font-bold text-black">
+                    <Image src="/logo.png" alt="" width="384" height="209" className="w-[50px] h-[28px] md:w-[74px] md:h-[42px] mix-blend-multiply" />
+                    <span className="hidden md:inline">Freunde fuers Leben</span>
+                </Link>
+                <ul className="hidden md:flex space-x-4 lg:space-x-8">
+                    {sections.map((section) => (
+                        <li key={section}>
+                            <Link
+                                href={`#${section}`}
+                                className={`hover:text-slate-600 transition-colors ${sections.indexOf(section) <= sections.indexOf(activeSection)
+                                    ? 'border-b-2 border-slate-600'
+                                    : ''
+                                    }`}
+                            >
+                                {section.charAt(0).toUpperCase() + section.slice(1)}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+                <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+                    <SheetTrigger asChild>
+                        <Button variant="ghost" size="icon" className="md:hidden">
+                            <Menu className="h-6 w-6" />
+                            <span className="sr-only">Toggle navigation menu</span>
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="bg-white w-[300px] sm:w-[400px]">
+                        <nav className="flex flex-col gap-4">
+                            {sections.map((section) => (
+                                <Link
+                                    key={section}
+                                    href={`#${section}`}
+                                    className="text-lg font-semibold hover:text-slate-600 transition-colors"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                                </Link>
+                            ))}
+                        </nav>
+                    </SheetContent>
+                </Sheet>
+            </div>
+        </nav>
+    )
+}
+
